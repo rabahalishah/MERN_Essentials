@@ -1200,3 +1200,79 @@ function App() {
 }
 
 export default App;
+
+
+*******************Persisting input value in the form and refracting our code using custom hooks
+
+//useLocalStorage.js
+//This hook is in short will store our given key and value in local storage so can persist it.
+import { useState, useEffect } from "react";
+
+const getLocalValue = (key, initValue) => {
+    //SSR Next.js 
+    if (typeof window === 'undefined') return initValue;
+
+    // if a value is already store 
+    const localValue = JSON.parse(localStorage.getItem(key));
+    if (localValue) return localValue;
+
+    // return result of a function 
+    if (initValue instanceof Function) return initValue();
+
+    return initValue;
+}
+
+const useLocalStorage = (key, initValue) => {
+    const [value, setValue] = useState(() => {
+        return getLocalValue(key, initValue);
+    });
+
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value])
+
+    return [value, setValue];
+}
+
+export default useLocalStorage 
+
+
+//useInput.js
+// This hook is get the value from the input form, get the current value from localstorage and reset the value stored in localstorage to its initial value
+import useLocalStorage from "./useLocalStorage";
+
+const useInput = (key, initValue) => {
+    const [value, setValue] = useLocalStorage(key, initValue);
+
+    const reset = () => setValue(initValue);
+
+    const attributeObj = {
+        value,
+        onChange: (e) => setValue(e.target.value)
+    }
+
+    return [value, reset, attributeObj];
+}
+
+export default useInput 
+
+
+//useToggle.js
+//This hook is used for our toggle box and update its value in local storage.
+import useLocalStorage from "./useLocalStorage";
+
+const useToggle = (key, initValue) => {
+    const [value, setValue] = useLocalStorage(key, initValue);
+
+    const toggle = (value) => {
+        setValue(prev => {
+            return typeof value === 'boolean' ? value : !prev;
+        })
+    }
+
+    return [value, toggle];
+}
+
+export default useToggle
+
+//Now we are no more using useContext for persisting checkbox state we are using local storage with this hook.
