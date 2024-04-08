@@ -29,6 +29,19 @@ Benefits:
 - Best Coding Standards: The project adheres to best coding standards and practices, promoting code maintainability, scalability, and readability.
 - Comprehensive Coverage: By covering essential concepts such as authentication, validation, and protected routes, MERN Essentials equips developers with a holistic understanding of full-stack development.
 
+# Resgisteration Page:
+![image](https://github.com/rabahalishah/MERN_Essentials/assets/117630286/c78892f5-e0fa-47ad-b788-217105e3c63e)
+
+# Sign In page:
+![image](https://github.com/rabahalishah/MERN_Essentials/assets/117630286/2f8a9798-3196-4c88-9651-44dec8274ff0)
+
+# Home Page:
+![image](https://github.com/rabahalishah/MERN_Essentials/assets/117630286/e6669a4d-00dc-4fe5-9f4b-9d96bb0f93d9)
+
+# Admin Page:
+![image](https://github.com/rabahalishah/MERN_Essentials/assets/117630286/7f7cb021-b251-4ba6-88e6-824cf732ed7d)
+
+
 # Documentation
 ## Creating instance of your database:
 ```bash
